@@ -1,4 +1,8 @@
 <?php
+// 
+
+
+
 
 	//var_dump($_GET);
 	//echo "<br>";
@@ -35,7 +39,38 @@
 			}
 		}
 	}
+	
+	$signupAgeerror = "";
+	
+	//kas vanus oli vähemalt 18
+	
+	if (isset ($_POST["signupAge"])) {
+		
+		if (empty ($_POST ["signupAge"])) {
+			$signupAgeerror = "See väli on kohustuslik!";
+			
+		}
+	
+		if  (($_POST["signupAge"]) < 18 ) {
+		$signupAgeerror = "Pead olema vähemalt 18 aastat vana";
+		
+	}
+	}
+	
+	//Millegi pärast ei saa erroreid panna nii, et kui tühi on, siis ütleks "See väli on kohustuslik" vaid ütleb ikkagi, et "Pead olema vähemalt 18 aastat vana.
+	
+	$signupNumbererror = "";
+	
+	if (isset ($_POST["signupNumber"])) {
+		
+		if (empty ($_POST ["signupNumber"])) {
+			//oli number, kuid see oli tühi
+			$signupNumbererror = "See väli on kohustuslik!";
+			
+		}
+	}	
 ?>
+
 
 
 
@@ -72,8 +107,12 @@
 			<br><br>
 			<input name="signupPassword" type="password" placeholder="Parool"> <?php echo $signupPassworderror; ?>
 			<br><br>
+			<input name="signupAge" type="age" placeholder="Vanus"> <?php echo $signupAgeerror; ?>
+			<br><br>
+			<input name="signupNumber" type="number" placeholder="Telefoninumber">  <?php echo $signupNumbererror; ?>
+			<br><br>
 			<input type="submit" value="Loo kasutaja">
-		
+			
 		
 		</form>
 
